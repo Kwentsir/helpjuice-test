@@ -7,5 +7,8 @@ class CreateSearchSessions < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
+    add_index :search_sessions, [:ip, :session_id], unique: true
+    add_index :search_queries, :query
+    add_index :search_queries, :finalized_at
   end
 end
