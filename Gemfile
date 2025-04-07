@@ -7,6 +7,10 @@ gem 'pg', '~> 1.5'
 
 gem 'dotenv-rails'
 
+gem 'sidekiq'
+
+gem 'sidekiq-cron'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
