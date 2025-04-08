@@ -11,6 +11,19 @@ gem 'sidekiq'
 
 gem 'sidekiq-cron'
 
+gem 'rswag-api'
+gem 'rswag-ui'
+gem 'rswag-specs'
+
+group :test do
+  gem 'shoulda-matchers', '~> 5.3'
+end
+
+group :development, :test do
+  gem 'factory_bot_rails'
+end
+
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
