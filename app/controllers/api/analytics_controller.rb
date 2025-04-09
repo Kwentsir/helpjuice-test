@@ -12,5 +12,15 @@ module Api
 
       render json: top_searches
     end
+    def user_analytics
+        session_id = session.id.to_s
+        user_summary = UserSearchSummary.find_by(session_id: session_id)
+
+        if user_summary
+          render json: { analytics: user_summary.search_counts }
+        else
+          render json: { analytics: {} }
+        end
+    end
   end
 end

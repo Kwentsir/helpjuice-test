@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'swagger_helper'
 
 RSpec.describe "SearchQueries", type: :request do
   describe "POST /api/search_queries" do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_07_161710) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_08_131056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -32,5 +32,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_07_161710) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ip", "session_id"], name: "index_search_sessions_on_ip_and_session_id", unique: true
+  end
+
+  create_table "user_search_summaries", force: :cascade do |t|
+    t.string "session_id"
+    t.string "ip"
+    t.text "search_counts"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_user_search_summaries_on_session_id", unique: true
   end
 end

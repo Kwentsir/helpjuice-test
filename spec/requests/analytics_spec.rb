@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'swagger_helper'
 
 RSpec.describe "Analytics", type: :request do
   describe "GET /api/popular" do

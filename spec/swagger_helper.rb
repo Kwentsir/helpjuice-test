@@ -21,13 +21,100 @@ RSpec.configure do |config|
         title: 'API V1',
         version: 'v1'
       },
-      paths: {},
+      paths: {
+                '/api/search_queries' => {
+          post: {
+            summary: 'Create a new search query',
+            description: 'Create a new search query record with the provided query. The IP address is automatically captured, and the Session ID is passed in the X-Session-ID header.',
+            tags: ['Search Queries'],
+            requestBody: {
+              description: 'Search Query Information',
+              required: true,
+              content: {
+                'application/json': {
+                  schema: {
+                    type: 'object',
+                    properties: {
+                      query: { type: 'string' }
+                    },
+                    required: ['query']
+                  }
+                }
+              }
+            },
+            responses: {
+              '200': {
+                description: 'Search Query created successfully'
+              },
+              '400': {
+                description: 'Invalid input data (missing query or X-Session-ID)'
+              },
+              '422': {
+                description: 'Unprocessable Content'
+              }
+            }
+          }
+        },
+        '/api/user_analytics' => {
+          get: {
+            summary: 'Retrieve analytics for the current user',
+            description: 'Fetch the search query counts for the current user based on their session (identified by cookies).',
+            tags: ['Analytics'],
+            responses: {
+              '200': {
+                description: 'User-specific search query analytics',
+                content: {
+                  'application/json': {
+                    schema: {
+                      type: 'object',
+                      additionalProperties: {
+                        type: 'integer',
+                        description: 'Count of each search query by the user'
+                      },
+                      example: {
+                        "What is": 3,
+                        "good car": 1
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        '/api/popular' => {
+          get: {
+            summary: 'Retrieve popular search queries',
+            description: 'Fetch the most popular search queries based on their frequency, in descending order of count.',
+            tags: ['Analytics'],
+            responses: {
+              '200': {
+                description: 'List of top search queries',
+                content: {
+                  'application/json': {
+                    schema: {
+                      type: 'object',
+                      additionalProperties: { 
+                        type: 'integer'
+                      },
+                      example: {
+                      "What is your name?": 1,
+                      "another query": 5
+                    }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       servers: [
         {
-          url: 'https://{defaultHost}',
+          url: 'http://{defaultHost}',
           variables: {
             defaultHost: {
-              default: 'www.example.com'
+              default: '172.25.244.4:3000'
             }
           }
         }
